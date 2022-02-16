@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang= 'en-US'>
+  <head>
+    <meta charset= 'UTF-8'>
+    <title>Talk with Cylian</title>
+    <link rel= 'stylesheet' href= 'style.css'>
+    <script src= '' defer></script>
+  </head>
+
+  <body>
+    <div class='bigC'>
+      <div class='text'>Instructions:</div>
+        <ol>
+          <li>Press the corresponding letter on your keyboard</li>
+          <li>See what happens next</li>
+          <li>Mash the buttons quickly in any order to create a beat</li>
+        </ol>
+      <div class= 'container'>
+        <div data-key='65' class='key'>
+          <img src='./photos/Cylianhead1.jpg'></img>
+          <kbd>A</kbd>
+        </div>
+        <div data-key='83' class='key'>
+          <img src ='./photos/cylianhead2.jpg'></img>
+          <kbd>S</kbd>
+        </div>
+        <div data-key='68' class='key'>
+          <img src ='./photos/cylianhead3.jpg'></img>
+          <kbd>D</kbd>
+        </div>
+        <div data-key='70' class='key'>
+          <img src ='./photos/cylianhead4.jpg'></img>
+          <kbd>F</kbd>
+        </div>
+        <div data-key='71' class='key'>
+          <img src ='./photos/cylianhead5.jpg'></img>
+          <kbd>G</kbd>
+        </div>
+        <div data-key='72' class='key'>
+          <img src ='./photos/cylianhead6.jpg'></img>
+          <kbd>H</kbd>
+        </div>
+        <div data-key='74' class='key'>
+          <img src ='./photos/cylianhead7.jpg'></img>
+          <kbd>J</kbd>
+        </div>
+        <div data-key='75' class='key'>
+          <img src ='./photos/cylianhead8.jpg'></img>
+          <kbd>K</kbd>
+        </div>
+        <div data-key='76' class='key'>
+          <img src ='./photos/cylianhead9.jpg'></img>
+          <kbd>L</kbd>
+        </div>
+      </div>
+      <div class='footer'>Copyright @Tommy Doak</div>
+    </div>
+
+    <audio data-key='65' src='sounds/audio1.mp4'></audio>
+    <audio data-key='83' src='sounds/audio11.mp4'></audio>
+    <audio data-key='68' src='sounds/audio3.mp4'></audio>
+    <audio data-key='70' src='sounds/audio10.mp4'></audio>
+    <audio data-key='71' src='sounds/audio5.mp4'></audio>
+    <audio data-key='72' src='sounds/audio6.mp4'></audio>
+    <audio data-key='74' src='sounds/audio7.mp4'></audio>
+    <audio data-key='75' src='sounds/audio8.mp4'></audio>
+    <audio data-key='76' src='sounds/audio4.mp4'></audio>
+
+    
+
+    <script>
+      
+      function getKey(e) {
+        const key = document.querySelector(`.key[data-key='${e.keyCode}']`);
+        const audio = document.querySelector(`audio[data-key='${e.keyCode}'`);
+
+        if (!audio) return;
+        key.classList.add('playing');
+        audio.currentTime = 0;
+        audio.play();
+      }
+
+      function endTransition(e) {
+        if (e.propertyName !== 'transform') return;
+        this.classList.remove('playing');
+      }
+      
+      const keys = document.querySelectorAll('.key');
+
+      keys.forEach(key => key.addEventListener('transitionend', endTransition));
+
+      window.addEventListener('keydown', getKey);
+
+    </script>
+  </body>
+</html>
