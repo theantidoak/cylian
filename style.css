@@ -17,11 +17,14 @@ html, body {
 }
 
 .text {
-    padding-top: 25px;
+    margin-top: 25px;
+    border-style: double;
+    border-color: rgb(0, 238, 255);
+    padding: 1rem;
 }
 
 .container {
-    padding-top: 70px;
+    margin-top: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
