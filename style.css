@@ -24,14 +24,14 @@ html, body {
 }
 
 .container {
-    margin-top: 80px;
+    margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
 
-img {
+.pic {
     display: none;
 }
 
@@ -50,7 +50,7 @@ img {
     border: none;
 }
 
-.playing img {
+.playing .pic {
     display: block;
     object-fit: contain;
     height: 100px; 
@@ -65,4 +65,39 @@ img {
 
 .footer {
     margin-top: auto;
+}
+
+.balloonText {
+    position: absolute;
+    margin-top: -40px;
+}
+
+.balloonDiv {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100vh;
+}
+
+.balloon {
+    z-index: 3;
+    position: absolute;
+}
+
+.explosion {
+    z-index: 1;
+    position: absolute;
+}
+
+.exPic {
+    max-height: 175px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    margin-left: 3rem;
+    margin-top: 3rem;
 }
