@@ -11,7 +11,8 @@ html, body {
 .bigC {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 8rem;
     align-items: center;
     min-height: 99vh;
 }
@@ -61,9 +62,8 @@ html, body {
     display: none;
 }
 
-
 .balloonStuff {
-    position: absolute;
+    position: fixed;
 }
 
 .balloonText {
@@ -80,20 +80,20 @@ html, body {
 }
 
 .balloon {
-    z-index: 3;
+    z-index: 4;
     position: absolute;
 }
 
 .explosion {
-    z-index: 1;
-    position: fixed;
+    z-index: 2;
+    position: absolute;
 }
 
 .exPic {
     max-height: 175px;
     border-radius: 50%;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     margin-left: 3rem;
     margin-top: 3rem;
 }

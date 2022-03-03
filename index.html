@@ -103,6 +103,8 @@
       let explosionImage = document.createTextNode('💥');
       let explodePic = document.createElement('img');
       let audio = document.createElement('audio');
+      let balloonText = document.querySelector('.balloonText');
+      let balloonStuff = document.querySelector('.balloonStuff');
 
       document.addEventListener('keydown', balloonBlowUp);
       
@@ -119,8 +121,10 @@
           balloonDiv.replaceChild(balloon, explosion);
           balloonDiv.removeChild(explodePic);
           balloonDiv.removeChild(audio);
+          balloonStuff.appendChild(balloonText);
         } else if (currentSize > 300) {
           balloonDiv.removeChild(audio);
+          balloonStuff.removeChild(balloonText);
           audio.setAttribute('src', 'sounds/audio3.mp4');
           balloonDiv.appendChild(audio);
           audio.currentTime = 0;
