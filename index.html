@@ -17,10 +17,12 @@
           <li>If you get stuck, refresh</li>
         </ol>
       </div>
-      <p class='balloonText'>Play with the balloon to see how big or small it can get by pressing the
+      <div class='balloonStuff'>
+        <p class='balloonText'>Play with the balloon to see how big or small it can get by pressing the
         'up' arrow and 'down' arrow on your keyboard!</p>
-      <div class='balloonDiv' style='font-size:20px;'>
-        <p class='balloon'>🎈</p>
+        <div class='balloonDiv' style='font-size:20px;'>
+          <p class='balloon'>🎈</p>
+        </div>
       </div>
       <div class='container'>
         <div data-key='65' class='key'>
@@ -110,6 +112,7 @@
         explosion.classList.add('explosion');
         explodePic.setAttribute('src', './photos/cylianhead8.jpg')
         explodePic.classList.add('exPic');
+        explosion.appendChild(explosionImage);
 
         if (balloonDiv.contains(explosion)) {
           balloonDiv.style.cssText = 'font-size: 20px';
@@ -122,7 +125,6 @@
           balloonDiv.appendChild(audio);
           audio.currentTime = 0;
           audio.play();
-          explosion.appendChild(explosionImage);
           balloonDiv.replaceChild(explosion, balloon);
           balloonDiv.appendChild(explodePic);
         } else if (e.keyCode == '38') {
