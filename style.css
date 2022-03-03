@@ -11,20 +11,21 @@ html, body {
 .bigC {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     min-height: 99vh;
+    border: solid white;
 }
 
 .text {
-    margin-top: 25px;
+    margin-top: 15px;
     border-style: double;
     border-color: rgb(0, 238, 255);
     padding: 1rem;
 }
 
 .container {
-    margin-top: 70px;
+    margin-top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
