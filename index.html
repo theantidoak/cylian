@@ -113,6 +113,7 @@
         explosion.classList.add('explosion');
         explodePic.setAttribute('src', './photos/cylianhead8.jpg')
         explodePic.classList.add('exPic');
+        explosion.appendChild(explosionImage);
         let currentSize = parseFloat(balloonDiv.style.fontSize);
         if (balloonDiv.contains(explosion)) {
           balloonDiv.style.cssText = 'font-size: 20px';
@@ -127,7 +128,6 @@
           balloonDiv.appendChild(audio);
           audio.currentTime = 0;
           audio.play();
-          explosion.appendChild(explosionImage);
           balloonDiv.replaceChild(explosion, balloon);
           balloonDiv.appendChild(explodePic);
         } else if (e.keyCode == '38') {

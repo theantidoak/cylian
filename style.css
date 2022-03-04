@@ -94,8 +94,6 @@ html, body {
     border-radius: 50%;
     position: relative;
     z-index: 3;
-    margin-left: 3rem;
-    margin-top: 3rem;
 }
 
 .footer {
