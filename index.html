@@ -141,7 +141,7 @@
         balloonDiv.style.fontSize = `${currentSize * 1.1}px`;
         audio.setAttribute('src', 'sounds/Recording (4).m4a');
         balloonDiv.appendChild(audio);
-        audio.currentTime = 0;
+        audio.currentTime = .5;
         audio.play();
         e.preventDefault();
       } else if (currentSize < 5) {
