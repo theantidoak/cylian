@@ -74,6 +74,7 @@
   <audio data-key='74' src='sounds/audio7.mp4'></audio>
   <audio data-key='75' src='sounds/audio8.mp4'></audio>
   <audio data-key='76' src='sounds/audio4.mp4'></audio>
+  
 
 
 
@@ -112,6 +113,7 @@
     let balloonText = document.querySelector('.balloonText');
     let balloonStuff = document.querySelector('.balloonStuff');
     let currentSize = document.querySelector('#styling').sheet.cssRules[13];
+    let audioSource = document.createElement('source');
     
     document.addEventListener('keydown', balloonBlowUp);
 
@@ -121,17 +123,18 @@
       explodePic.classList.add('exPic');
       explosion.appendChild(explosionImage);
       let newSize = parseFloat(currentSize.style.fontSize);
+      let playPromise = audio.play();
       if (balloonDiv.contains(explosion)) {
         currentSize.style.fontSize = '20px';
         balloonDiv.replaceChild(balloon, explosion);
         balloonDiv.removeChild(explodePic);
-        balloonDiv.removeChild(audio);
+        document.body.removeChild(audio);
         balloonStuff.appendChild(balloonText);
       } else if (newSize > 300) {
-        balloonDiv.removeChild(audio);
+        document.body.removeChild(audio);
         balloonStuff.removeChild(balloonText);
         audio.setAttribute('src', 'sounds/audio3.mp4');
-        balloonDiv.appendChild(audio);
+        document.body.appendChild(audio);
         audio.currentTime = 0;
         audio.play();
         explosion.style.fontSize = '515px';
@@ -139,19 +142,29 @@
         balloonDiv.appendChild(explodePic);
       } else if (e.keyCode == '38') {
         currentSize.style.fontSize = `${newSize * 1.1}px`;
-        audio.setAttribute('src', 'sounds/Recording (4).m4a');
-        balloonDiv.appendChild(audio);
+        audioSource.setAttribute('src', 'sounds/Recording (4).m4a');
+        audioSource.setAttribute('type', 'audio/mp4');
+        audio.appendChild(audioSource);
+        document.body.appendChild(audio);
         audio.currentTime = .5;
         audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {});
+        };
         e.preventDefault();
       } else if (newSize < 5) {
         currentSize.style.fontSize = '20px';
       } else if (e.keyCode == '40') {
         currentSize.style.fontSize = `${newSize * .9}px`;
-        audio.setAttribute('src', 'sounds/Recording (9).m4a');
-        balloonDiv.appendChild(audio);
-        audio.currentTime = 0;
+        audioSource.setAttribute('src', 'sounds/Recording (9).m4a');
+        audioSource.setAttribute('type', 'audio/mp4');
+        audio.appendChild(audioSource);
+        document.body.appendChild(audio);
+        audio.currentTime = .5;
         audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {});
+        };
         e.preventDefault();
       } else {
         return;
