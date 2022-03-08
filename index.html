@@ -4,7 +4,7 @@
 <head>
   <meta charset='UTF-8'>
   <title>Jellyman Kelly</title>
-  <link rel='stylesheet' href='style.css'>
+  <link id='styling' rel='stylesheet' href='style.css'>
   <script src='' defer></script>
 </head>
 
@@ -20,7 +20,7 @@
     <div class='balloonStuff'>
       <p class='balloonText'>Play with the balloon to see how big or small it can get by pressing the
         'up' arrow and 'down' arrow on your keyboard!</p>
-      <div class='balloonDiv' style='font-size:20px;'>
+      <div class='balloonDiv'>
         <p class='balloon'>🎈</p>
       </div>
     </div>
@@ -111,8 +111,8 @@
     let audio = document.createElement('audio');
     let balloonText = document.querySelector('.balloonText');
     let balloonStuff = document.querySelector('.balloonStuff');
-
-
+    let currentSize = document.querySelector('#styling').sheet.cssRules[13];
+    
     document.addEventListener('keydown', balloonBlowUp);
 
     function balloonBlowUp(e) {
@@ -120,14 +120,14 @@
       explodePic.setAttribute('src', './photos/cylianhead8.jpg')
       explodePic.classList.add('exPic');
       explosion.appendChild(explosionImage);
-      let currentSize = parseFloat(balloonDiv.style.fontSize);
+      let newSize = parseFloat(currentSize.style.fontSize);
       if (balloonDiv.contains(explosion)) {
-        balloonDiv.style.cssText = 'font-size: 20px';
+        currentSize.style.fontSize = '20px';
         balloonDiv.replaceChild(balloon, explosion);
         balloonDiv.removeChild(explodePic);
         balloonDiv.removeChild(audio);
         balloonStuff.appendChild(balloonText);
-      } else if (currentSize > 300) {
+      } else if (newSize > 300) {
         balloonDiv.removeChild(audio);
         balloonStuff.removeChild(balloonText);
         audio.setAttribute('src', 'sounds/audio3.mp4');
@@ -138,16 +138,16 @@
         balloonDiv.replaceChild(explosion, balloon);
         balloonDiv.appendChild(explodePic);
       } else if (e.keyCode == '38') {
-        balloonDiv.style.fontSize = `${currentSize * 1.1}px`;
+        currentSize.style.fontSize = `${newSize * 1.1}px`;
         audio.setAttribute('src', 'sounds/Recording (4).m4a');
         balloonDiv.appendChild(audio);
         audio.currentTime = .5;
         audio.play();
         e.preventDefault();
-      } else if (currentSize < 5) {
-        balloonDiv.style.cssText = 'font-size: 20px';
+      } else if (newSize < 5) {
+        currentSize.style.fontSize = '20px';
       } else if (e.keyCode == '40') {
-        balloonDiv.style.fontSize = `${currentSize * .9}px`;
+        currentSize.style.fontSize = `${newSize * .9}px`;
         audio.setAttribute('src', 'sounds/Recording (9).m4a');
         balloonDiv.appendChild(audio);
         audio.currentTime = 0;
