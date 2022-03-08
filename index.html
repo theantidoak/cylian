@@ -123,7 +123,6 @@
       explodePic.classList.add('exPic');
       explosion.appendChild(explosionImage);
       let newSize = parseFloat(currentSize.style.fontSize);
-      let playPromise = audio.play();
       if (balloonDiv.contains(explosion)) {
         currentSize.style.fontSize = '20px';
         balloonDiv.replaceChild(balloon, explosion);
@@ -148,9 +147,6 @@
         document.body.appendChild(audio);
         audio.currentTime = .5;
         audio.play();
-        if (playPromise !== undefined) {
-          playPromise.then(_ => {});
-        };
         e.preventDefault();
       } else if (newSize < 5) {
         currentSize.style.fontSize = '20px';
@@ -161,10 +157,11 @@
         audio.appendChild(audioSource);
         document.body.appendChild(audio);
         audio.currentTime = .5;
-        audio.play();
+        let playPromise = audio.play();
         if (playPromise !== undefined) {
-          playPromise.then(_ => {});
-        };
+          playPromise.then(_ => {})
+          .catch(error => {});
+        }
         e.preventDefault();
       } else {
         return;
