@@ -82,29 +82,58 @@
     // MouseOver
     let textInstr = document.querySelector('.text');
     let coloringDiv = document.querySelector('#styling').sheet;
-    coloringDiv.insertRule('.appear{ border: solid white; position: fixed; right: 20rem; top: 5rem }');
+    coloringDiv.insertRule('.appear{ position: fixed; left: 10rem; top: 5rem; display: flex; justify-content: center; align-items: center; gap: 1rem; transition: all 4s ease }');
     let bigC = document.querySelector('.bigC');
     let hoverDiv = document.createElement('div');
     hoverDiv.classList.add('appear');
     let appearImg = document.createElement('img');
     appearImg.setAttribute('src', './photos/cylianhead2.jpg');
     appearImg.classList.add('exPic');
+    let date = document.createElement('p');
+    date.classList.add('date');
+    coloringDiv.insertRule('.date{ max-width: 5rem }');
     hoverDiv.appendChild(appearImg);
-    
+    hoverDiv.appendChild(date);
 
     function colorMe(event) {
       coloringDiv.insertRule('.text{ background-color: white; color: black }');
       // Also event.target.style.color
       bigC.appendChild(hoverDiv);
+      newAge()
     };
 
     function unColorMe() {
       coloringDiv.deleteRule('.text{ background-color: white; color: black }');
       bigC.removeChild(hoverDiv);
+      date.textContent = ' ';
     };
 
     textInstr.addEventListener('mouseover', colorMe);
     textInstr.addEventListener('mouseout', unColorMe);
+
+    // Age
+    function newAge() {
+      let birthday = new Date('Thu Dec 30 2021 04:18:03 GMT+0100 (Central European Standard Time');
+      let diff = new Date() - birthday;
+      let seconds = Math.floor(diff/1000);
+      let minutes = Math.floor(seconds/60);
+      let hours = Math.floor(minutes/60);
+      let days = Math.floor(hours/24);
+      let weeks = Math.floor(days/7);
+      let months = Math.floor(weeks/4);
+      let years = Math.floor(months/12);
+
+      seconds %= 60;
+      minutes %= 60;
+      hours %= 24;
+      days %= 7;
+      weeks %= 4;
+      months %= 12;
+
+      let ageDisplay = document.createTextNode(`Years: ${years}  Months: ${months} Weeks: ${weeks} \n
+      Days: ${days} Hours: ${hours} Minutes: ${minutes} Seconds: ${seconds}`);
+      date.appendChild(ageDisplay);
+    }
     
     // Soundboard
     const keys = document.querySelectorAll('.key');
