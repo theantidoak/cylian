@@ -163,71 +163,54 @@
     let balloon = document.querySelector('.balloon');
     let balloonDiv = document.querySelector('.balloonDiv');
     let explosion = document.createElement('p');
+    explosion.classList.add('explosion');
     let explosionImage = document.createTextNode('💥');
     let explodePic = document.createElement('img');
+    explodePic.setAttribute('src', './photos/cylianhead8.jpg')
+    explodePic.classList.add('exPic');
+    explosion.appendChild(explosionImage);
     let audio = document.createElement('audio');
     let balloonText = document.querySelector('.balloonText');
     let balloonStuff = document.querySelector('.balloonStuff');
-    let currentSize = document.querySelector('#styling').sheet.cssRules[13];
+    let currentSize = document.querySelector('#styling').sheet.cssRules[15];
     let audioSource = document.createElement('source');
+    audioSource.setAttribute('src', ' ');
+    audioSource.setAttribute('type', 'audio/mp4');
+    audio.appendChild(audioSource);
     let audioPoint = document.querySelector("audio[data-key='65']");
+    document.body.insertBefore(audio, audioPoint);
     
     document.addEventListener('keydown', balloonBlowUp);
 
     function balloonBlowUp(e) {
-      document.body.appendChild(audio);
-      explosion.classList.add('explosion');
-      explodePic.setAttribute('src', './photos/cylianhead8.jpg')
-      explodePic.classList.add('exPic');
-      explosion.appendChild(explosionImage);
       let newSize = parseFloat(currentSize.style.fontSize);
       if (balloonDiv.contains(explosion)) {
         currentSize.style.fontSize = '20px';
         balloonDiv.replaceChild(balloon, explosion);
         balloonDiv.removeChild(explodePic);
-        audio.removeChild(audioSource);
+        audioSource.setAttribute('src', ' ');
         balloonStuff.appendChild(balloonText);
       } else if (newSize > 300) {
-        audio.removeChild(audioSource);
         balloonStuff.removeChild(balloonText);
-        audioSource.src = 'sounds/audio3.mp4';
-        audioSource.setAttribute('type', 'audio/mp4');
-        audio.appendChild(audioSource);
-        document.body.insertBefore(audio, audioPoint);
+        audioSource.setAttribute('src', 'sounds/audio3.mp4');
         audio.currentTime = 0;
         audio.play();
         explosion.style.fontSize = '515px';
         balloonDiv.replaceChild(explosion, balloon);
         balloonDiv.appendChild(explodePic);
       } else if (e.keyCode == '38') {
-        if (audio.firstChild) {
-          audio.removeChild(audioSource);
-        }
         currentSize.style.fontSize = `${newSize * 1.1}px`;
-        audioSource.src = 'sounds/Recording (4).m4a';
-        audioSource.setAttribute('type', 'audio/mp4');
-        audio.appendChild(audioSource);
-        document.body.insertBefore(audio, audioPoint);
+        audioSource.setAttribute('src', 'sounds/Recording (4).m4a');
         audio.currentTime = .5;
         audio.play();
         e.preventDefault();
       } else if (newSize < 5) {
         currentSize.style.fontSize = '20px';
       } else if (e.keyCode == '40') {
-        if (audio.firstChild) {
-          audio.removeChild(audioSource);
-        }
         currentSize.style.fontSize = `${newSize * .9}px`;
-        audioSource.src = 'sounds/Recording (9).m4a';
-        audioSource.setAttribute('type', 'audio/mp4');
-        audio.appendChild(audioSource);
-        document.body.insertBefore(audio, audioPoint);
+        audioSource.setAttribute('src', 'sounds/Recording (9).m4a');
         audio.currentTime = .5;
         audio.play();
-        if (audio.play() !== undefined) {
-          audio.play().then(_ => {})
-          .catch(error => {return});
-        }
         e.preventDefault();
       } else {
         return;
