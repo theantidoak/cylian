@@ -103,10 +103,18 @@
       coloringDiv.deleteRule('.text{ background-color: white; color: black }');
       bigC.removeChild(hoverDiv);
       date.textContent = ' ';
+      textInstr.style.backgroundColor = 'black';
+      document.querySelectorAll('.key').forEach((event) => event.style.backgroundColor = 'black');
+    };
+
+    function colorChange(e){
+      textInstr.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)';
+      document.querySelectorAll('.key').forEach((event) => event.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)');
     };
 
     textInstr.addEventListener('mouseover', colorMe);
     textInstr.addEventListener('mouseout', unColorMe);
+    textInstr.addEventListener('mousemove', colorChange);
 
     // Age
     function newAge() {
