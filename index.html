@@ -76,6 +76,7 @@
   <audio data-key='76' src='sounds/audio4.mp4'></audio>
 
   <script>
+
     // MouseOver
     let textInstr = document.querySelector('.text');
     let coloringDiv = document.querySelector('#styling').sheet;
@@ -91,30 +92,6 @@
     coloringDiv.insertRule('.date{ max-width: 5rem }');
     hoverDiv.appendChild(appearImg);
     hoverDiv.appendChild(date);
-
-    function colorMe(event) {
-      coloringDiv.insertRule('.text{ background-color: white; color: black }');
-      // Also event.target.style.color
-      bigC.appendChild(hoverDiv);
-      newAge()
-    };
-
-    function unColorMe() {
-      coloringDiv.deleteRule('.text{ background-color: white; color: black }');
-      bigC.removeChild(hoverDiv);
-      date.textContent = ' ';
-      textInstr.style.backgroundColor = 'black';
-      document.querySelectorAll('.key').forEach((event) => event.style.backgroundColor = 'black');
-    };
-
-    function colorChange(e){
-      textInstr.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)';
-      document.querySelectorAll('.key').forEach((event) => event.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)');
-    };
-
-    textInstr.addEventListener('mouseover', colorMe);
-    textInstr.addEventListener('mouseout', unColorMe);
-    textInstr.addEventListener('mousemove', colorChange);
 
     // Age
     function newAge() {
@@ -140,6 +117,72 @@
       date.appendChild(ageDisplay);
     }
     
+    // Clock
+    let clock = document.createElement('div');
+    clock.className = 'clockClass';
+    coloringDiv.insertRule('.clockClass{ display: flex; border: solid white 5px; border-radius: 50%; position: fixed; right: 10rem; top: 5rem; height: 150px; width: 150px }');
+
+    let clockImg = document.createElement('img');
+    clockImg.src = './photos/cylianhead4.jpg';
+    clockImg.className = 'clockImg';
+    coloringDiv.insertRule('.clockImg{ height: 150px; width: 150px; border-radius: 50%; transition: all .05sec ease; z-index: 2 }');
+    clock.appendChild(clockImg);
+
+    coloringDiv.insertRule('.handClass{ position: absolute; height: 2px; width: 50%; top: 50%; z-index: 3; transform-origin: 100%; transform: rotate(90deg); }');
+    let minuteHand = document.createElement('div');
+    let hourHand = document.createElement('div');
+    hourHand.style.width = '40%';
+    hourHand.style.marginLeft = '1rem';
+    minuteHand.classList.add('handClass');
+    hourHand.classList.add('handClass');
+    clock.appendChild(minuteHand);
+    clock.appendChild(hourHand);
+
+    function goClock() {
+      const date = new Date();
+      const seconds = date.getSeconds();
+      const secondsDegrees = (seconds / 60) * 360;
+      clockImg.style.transform = `rotate(${secondsDegrees}deg)`;
+
+      let minz = date.getMinutes();
+      let minsDegrees = ((minz / 60) * 360) + 90;
+      minuteHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+      let hourz = date.getHours();
+      let hoursDegrees = ((hourz / 12) * 360) + 90;
+      hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+    }
+    setInterval(goClock, 1000);
+
+    // Functions and Event Listeners for Hidden Content
+    function colorMe(event) {
+      coloringDiv.insertRule('.text{ background-color: white; color: black }');
+      // Also event.target.style.color
+      bigC.appendChild(hoverDiv);
+      newAge();
+      bigC.appendChild(clock);
+    };
+
+    function unColorMe() {
+      coloringDiv.deleteRule('.text{ background-color: white; color: black }');
+      bigC.removeChild(hoverDiv);
+      date.textContent = ' ';
+      textInstr.style.backgroundColor = 'black';
+      document.querySelectorAll('.key').forEach((event) => event.style.backgroundColor = 'black');
+      bigC.removeChild(clock);
+    };
+
+    function colorChange(e){
+      textInstr.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)';
+      document.querySelectorAll('.key').forEach((event) => event.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)');
+      hourHand.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)';
+      minuteHand.style.backgroundColor = 'rgb('+e.offsetX+','+e.offsetY+', 40)';
+    };
+
+    textInstr.addEventListener('mouseover', colorMe);
+    textInstr.addEventListener('mouseout', unColorMe);
+    textInstr.addEventListener('mousemove', colorChange);
+
     // Soundboard
     const keys = document.querySelectorAll('.key');
     function getKey(e) {
