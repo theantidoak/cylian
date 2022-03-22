@@ -224,14 +224,21 @@
     audio.setAttribute('type', 'audio/mp4');
     let audioPoint = document.querySelector("audio[data-key='65']");
     document.body.insertBefore(audio, audioPoint);
-    let currentSize = document.querySelector('#styling').sheet.cssRules[18];
-    
+    let cssVar = document.querySelector('#styling').sheet;
+    let currentSize;
+
+    for (let i = 0; i < cssVar.cssRules.length; i++) {
+      if (cssVar.cssRules[i].selectorText == '.balloon') {
+        currentSize = cssVar.cssRules[i];
+      }
+    }
+
     document.addEventListener('keydown', balloonBlowUp);
 
     function balloonBlowUp(e) {
       let newSize = parseFloat(currentSize.style.fontSize);
       if (balloonDiv.contains(explosion)) {
-        currentSize.style.fontSize = '20px';
+        currentSize.style.setProperty('font-size', '20px');
         balloonDiv.replaceChild(balloon, explosion);
         balloonDiv.removeChild(explodePic);
         audio.setAttribute('src', ' ');
